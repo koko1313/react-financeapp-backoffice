@@ -40,7 +40,7 @@ export default function UserList() {
             return <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.isAdmin ? "Да" : "No"}</td>
+                <td>{user.isAdmin ? "Да" : "Не"}</td>
                 <td>
                     <button className="btn btn-link" onClick={() => { deleteUser(user.id, user.name) }}>Изтрий</button>
                 </td>
