@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { get } from "../../network-client";
 
 export default function UserList() {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        if(users.length === 0) {
+            fetchUsers();
+        }
+    }, []);
+
+    const fetchUsers = async () => {
+        get("/user/get").then(resp => {
+            setUsers(resp.data);
+        });
+    }
+
+    const renderUsers = () => {
+        return users.map(user => {
+            return <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.isAdmin ? "Да" : "Не"}</td>
+                <td>
+                    <a href="/">Редактирай</a>
+                </td>
+            </tr>;
+        });
+    }
+
     return <>
-        <table class="table table-striped">
+        <table className="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Име</th>
@@ -12,38 +41,7 @@ export default function UserList() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Димчо Господинов</td>
-                    <td>dimcho@mail.com</td>
-                    <td>Да</td>
-                    <td>
-                        <a href="/">Редактирай</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Калоян Величков</td>
-                    <td>koko@mail.com</td>
-                    <td>Да</td>
-                    <td>
-                        <a href="/">Редактирай</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Иван Иванов</td>
-                    <td>vanko@mail.com</td>
-                    <td>Да</td>
-                    <td>
-                        <a href="/">Редактирай</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Пешо Швепса</td>
-                    <td>pesho@mail.com</td>
-                    <td>Не</td>
-                    <td>
-                        <a href="/">Редактирай</a>
-                    </td>
-                </tr>
+                {renderUsers()}
             </tbody>
         </table>
     </>;

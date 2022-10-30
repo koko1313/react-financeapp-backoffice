@@ -19,7 +19,7 @@ export default function Register() {
             <input type="email" className="form-control" id="rePasswordInput" />
         </div>
         <div className="text-end">
-            <button type="button" class="btn btn-success">Вход</button>
+            <button type="button" className="btn btn-success">Вход</button>
         </div>
     </>;
 }
