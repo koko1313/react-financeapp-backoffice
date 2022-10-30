@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { request } from "../../network-client";
+import { getJwtTokenCookie } from "../../utils/utils";
 
 export default function Register() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
+
+    useEffect(() => {
+        const jwtToken = getJwtTokenCookie();
+        
+        if (jwtToken) {
+            navigate("/");
+        }
+    }, []);
 
     const registerUser = () => {
         if (password === rePassword) {
@@ -19,7 +31,9 @@ export default function Register() {
                     password: password,
                     isAdmin: true
                 }
-            );
+            ).then(() => {
+                navigate("/login");
+            });
         }
     }
 
@@ -41,7 +55,7 @@ export default function Register() {
             <input type="password" className="form-control" onChange={(e) => setRePassword(e.target.value)} />
         </div>
         <div className="text-end">
-            <button type="button" className="btn btn-success" onClick={registerUser}>Вход</button>
+            <button type="button" className="btn btn-success" onClick={registerUser}>Регистрация</button>
         </div>
     </>;
 }

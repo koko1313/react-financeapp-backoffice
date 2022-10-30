@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { getJwtTokenCookie } from "../../utils/utils";
 
 export default function Navbar () {
+    const [jwtToken, setJwtToken] = useState(undefined);
+
+    useEffect(() => {
+        const jwtToken = getJwtTokenCookie();
+        setJwtToken(jwtToken);
+    }, []);
+    
     return <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -14,12 +22,30 @@ export default function Navbar () {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/">Начало</NavLink>
                         </li>
+                        
+                        {jwtToken && 
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Логин</NavLink>
+                            <NavLink className="nav-link" to="/users">Потребители</NavLink>
                         </li>
+                        }
+                        
+                        {!jwtToken && 
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/login">Вход</NavLink>
+                        </li> 
+                        }
+
+                        {!jwtToken && 
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/register">Регистрация</NavLink>
                         </li>
+                        }
+
+                        {jwtToken && 
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/logout">Изход</NavLink>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>
