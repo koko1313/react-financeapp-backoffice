@@ -3,14 +3,14 @@ import { getJwtTokenCookie, removeJwtTokenCookie } from "../utils/utils";
 
 const BASE_URL = "https://financeapp-be.vercel.app";
 
-export const request = (method, resource, params, requestBody) => {
+export const request = (method, endpoint, queryParams, requestBody) => {
     const jwtToken = getJwtTokenCookie();
 
     const sentRequest = axios.request( 
         {
             method,
-            url: resource,
-            params: params,
+            url: endpoint,
+            params: queryParams,
             data: requestBody,
             baseURL: BASE_URL,
             headers: {
