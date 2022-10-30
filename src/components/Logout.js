@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { removeJwtTokenCookie } from "../../utils/utils";
+import { removeJwtTokenCookie } from "../utils/utils";
 
 export default function Register() {
 

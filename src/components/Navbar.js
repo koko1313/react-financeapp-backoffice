@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getJwtTokenCookie } from "../../utils/utils";
+import { getJwtTokenCookie } from "../utils/utils";
 
 export default function Navbar () {
     const [jwtToken, setJwtToken] = useState(undefined);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { request } from "../../network-client";
+import { request } from "../network-client";
 import { useNavigate } from "react-router-dom";
-import { getJwtTokenCookie } from "../../utils/utils";
+import { getJwtTokenCookie } from "../utils/utils";
 
 export default function UserList() {
     const navigate = useNavigate();

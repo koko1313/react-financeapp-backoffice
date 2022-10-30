@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { request } from "../../network-client";
-import { getJwtTokenCookie } from "../../utils/utils";
+import { request } from "../network-client";
+import { getJwtTokenCookie } from "../utils/utils";
 
 export default function Register() {
     const navigate = useNavigate();

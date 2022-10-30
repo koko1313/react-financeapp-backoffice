@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { request } from "../../network-client";
-import { getJwtTokenCookie } from "../../utils/utils";
+import { request } from "../network-client";
+import { getJwtTokenCookie } from "../utils/utils";
 
 export default function Login() {
     const cookies = new Cookies();
