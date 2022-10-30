@@ -1,19 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import Register from "./components/Register";
+import UserList from "./components/UserList";
 
-function App() {
+export default function App() {
   return <>
     <BrowserRouter>
       <Navbar />
     
-      <Routes>
-        <Route path="/" element={ <h1>Елемент 1</h1> } />
-        <Route path="/login" element={ <h1>Елемент 2</h1> } />
-        <Route path="/register" element={ <h1>Елемент 3</h1> } />
-      </Routes>
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={ <UserList /> } />
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/register" element={ <Register /> } />
+        </Routes>
+      </div>
     </BrowserRouter>
   </>;
 }
-
-export default App;

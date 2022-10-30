@@ -12,7 +12,7 @@ export default function Navbar () {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <NavLink className="nav-link active" to="/">Начало</NavLink>
+                            <NavLink className="nav-link" to="/">Начало</NavLink>
                         </li>
                         <li class="nav-item">
                             <NavLink className="nav-link" to="/login">Логин</NavLink>
