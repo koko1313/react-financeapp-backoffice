@@ -7,6 +7,7 @@ export default function UserList() {
     const navigate = useNavigate();
 
     const [users, setUsers] = useState([]);
+    const [version, setVersion] = useState(1); // we will use this to force update the component
 
     useEffect(() => {
         const token = getJwtTokenCookie();
@@ -16,12 +17,22 @@ export default function UserList() {
         }
 
         fetchUsers();
-    }, []);
+    }, [version]);
 
     const fetchUsers = async () => {
         request("get", "/user/get").then(resp => {
             setUsers(resp.data);
         });
+    }
+
+    const deleteUser = async (id, name) => {
+        const confirm = window.confirm(`Сигурен ли сте, че искате да изтриете ${name}?`);
+
+        if (confirm) {
+            request("delete", `user/delete/${id}`).then(() => {
+                setVersion(version => version + 1);
+            });
+        }
     }
 
     const renderUsers = () => {
@@ -31,7 +42,7 @@ export default function UserList() {
                 <td>{user.email}</td>
                 <td>{user.isAdmin ? "Да" : "No"}</td>
                 <td>
-                    <button className="btn btn-link" onClick={() => { alert("Епа не работи тва все още") }}>Редактирай</button>
+                    <button className="btn btn-link" onClick={() => { deleteUser(user.id, user.name) }}>Изтрий</button>
                 </td>
             </tr>;
         });
