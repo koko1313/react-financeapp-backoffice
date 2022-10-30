@@ -1,10 +1,12 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 const BASE_URL = "https://financeapp-be.vercel.app";
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdkZDI3MjEzLThhOGUtNDg2MC1hMDFkLTEwZDFjNjdmMThkMyIsImVtYWlsIjoiZXhhbXBsZTJAbWFpbC5jb20iLCJuYW1lIjoiUGVzaG8gU2h2ZXBzYSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NzEzODYxOCwiZXhwIjoxNjY3MTQyMjE4fQ.wtrCS8JowJfttQUfhWGy-jKcIkzx4eMOkSRcibyywOM";
-
 export const request = (method, resource, params, requestBody) => {
+    const cookies = new Cookies();
+    const token = cookies.get("jwtToken");
+
     return axios.request( 
         {
             method,
