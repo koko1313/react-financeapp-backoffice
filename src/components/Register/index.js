@@ -1,25 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { request } from "../../network-client";
 
 export default function Register() {
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [rePassword, setRePassword] = useState("");
+
+    const registerUser = () => {
+        if (password === rePassword) {
+            request(
+                "post",
+                "/user/register", 
+                undefined,
+                {
+                    email: email,
+                    name: name,
+                    password: password,
+                    isAdmin: true
+                }
+            );
+        }
+    }
+
     return <>
         <div className="mb-3">
-            <label htmlFor="emailInput" className="form-label">Email</label>
-            <input type="email" className="form-control" id="emailInput" />
+            <label className="form-label">Email</label>
+            <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="mb-3">
-            <label htmlFor="nameInput" className="form-label">Име</label>
-            <input type="email" className="form-control" id="nameInput" />
+            <label className="form-label">Име</label>
+            <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="mb-3">
-            <label htmlFor="passwordInput" className="form-label">Парола</label>
-            <input type="email" className="form-control" id="passwordInput" />
+            <label className="form-label">Парола</label>
+            <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="mb-3">
-            <label htmlFor="rePasswordInput" className="form-label">Повтори парола</label>
-            <input type="email" className="form-control" id="rePasswordInput" />
+            <label className="form-label">Повтори парола</label>
+            <input type="password" className="form-control" onChange={(e) => setRePassword(e.target.value)} />
         </div>
         <div className="text-end">
-            <button type="button" className="btn btn-success">Вход</button>
+            <button type="button" className="btn btn-success" onClick={registerUser}>Вход</button>
         </div>
     </>;
 }

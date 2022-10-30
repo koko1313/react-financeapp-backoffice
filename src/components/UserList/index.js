@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getRequest } from "../../network-client";
+import { request } from "../../network-client";
 
 export default function UserList() {
 
@@ -10,7 +10,7 @@ export default function UserList() {
     }, []);
 
     const fetchUsers = async () => {
-        getRequest("/user/get").then(resp => {
+        request("get", "/user/get").then(resp => {
             setUsers(resp.data);
         });
     }
