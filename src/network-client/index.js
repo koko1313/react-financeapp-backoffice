@@ -11,6 +11,30 @@ const config = {
     }
 }
 
-export const get = (resource) => {
-    return axios.get(resource, config);
+export const getRequest = (resource, params) => {
+    return axios.get(resource, {
+        params: params,
+        ...config
+    });
+}
+
+export const putRequest = (resource, requestBody) => {
+    return axios.put(resource, {
+        data: requestBody,
+        ...config
+    });
+}
+
+export const postRequest = (resource, requestBody) => {
+    return axios.post(resource, {
+        data: requestBody,
+        ...config
+    });
+}
+
+export const deleteRequest = (resource, requestBody) => {
+    return axios.delete(resource, {
+        data: requestBody,
+        ...config
+    });
 }

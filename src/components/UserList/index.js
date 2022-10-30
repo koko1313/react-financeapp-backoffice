@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { get } from "../../network-client";
+import { getRequest } from "../../network-client";
 
 export default function UserList() {
 
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        if(users.length === 0) {
-            fetchUsers();
-        }
+        fetchUsers();
     }, []);
 
     const fetchUsers = async () => {
-        get("/user/get").then(resp => {
+        getRequest("/user/get").then(resp => {
             setUsers(resp.data);
         });
     }
