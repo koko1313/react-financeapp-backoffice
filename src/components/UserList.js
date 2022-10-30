@@ -38,6 +38,7 @@ export default function UserList() {
     }
 
     return <>
+    <div class="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -51,5 +52,6 @@ export default function UserList() {
                 {renderUsers()}
             </tbody>
         </table>
+    </div>
     </>;
 }
