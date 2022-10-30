@@ -1,13 +1,12 @@
 import axios from "axios";
-import Cookies from "universal-cookie";
+import { getJwtTokenCookie, removeJwtTokenCookie } from "../utils/utils";
 
 const BASE_URL = "https://financeapp-be.vercel.app";
 
 export const request = (method, resource, params, requestBody) => {
-    const cookies = new Cookies();
-    const token = cookies.get("jwtToken");
+    const jwtToken = getJwtTokenCookie();
 
-    return axios.request( 
+    const sentRequest = axios.request( 
         {
             method,
             url: resource,
@@ -15,8 +14,17 @@ export const request = (method, resource, params, requestBody) => {
             data: requestBody,
             baseURL: BASE_URL,
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${jwtToken}`
             }
         }
-    );
+    ).catch(ex => {
+        const resp = ex.response;
+        if (resp.status === 401 || resp.status === 403) {
+            // remove jwtToken from the cookies and redirect to login
+            removeJwtTokenCookie();
+            window.location.href = "/login";
+        }
+    });
+
+    return sentRequest;
 }

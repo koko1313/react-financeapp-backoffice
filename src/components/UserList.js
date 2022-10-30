@@ -49,7 +49,7 @@ export default function UserList() {
     }
 
     return <>
-    <div class="table-responsive">
+    <div className="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>
