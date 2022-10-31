@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getJwtTokenCookie, removeJwtTokenCookie } from "../utils/utils";
+import { getJwtTokenCookie, logout } from "../utils/utils";
 
 const BASE_URL = "https://financeapp-be.vercel.app";
 
@@ -20,9 +20,7 @@ export const request = (method, endpoint, queryParams, requestBody) => {
     ).catch(ex => {
         const resp = ex.response;
         if (resp.status === 401 || resp.status === 403) {
-            // remove jwtToken from the cookies and redirect to login
-            removeJwtTokenCookie();
-            window.location.href = "/login";
+            logout();
         }
     });
 
