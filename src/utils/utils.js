@@ -5,6 +5,11 @@ export const getJwtTokenCookie = () => {
     return cookies.get("jwtToken");
 }
 
+export const setJwtTokenCookie = (jwtToken) => {
+    const cookies = new Cookies();
+    return cookies.set("jwtToken", jwtToken)
+}
+
 export const removeJwtTokenCookie = () => {
     const cookies = new Cookies();
     cookies.remove("jwtToken");
